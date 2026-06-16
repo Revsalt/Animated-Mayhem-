@@ -58,6 +58,6 @@ The multiplayer architecture relies heavily on Mirror for state synchronization:
 ---
 
 ### Play the Game
-[![Play on Itch.io](https://github.com/user-attachments/assets/75e42803-aba7-42cc-9ef7-3189fbdcdd41)]([https://your-itch-link-here.itch.io](https://sleem-alaa.itch.io/animated-mayhem))
+[![Play on Itch.io](https://github.com/user-attachments/assets/75e42803-aba7-42cc-9ef7-3189fbdcdd41)](https://sleem-alaa.itch.io/animated-mayhem)
 
 *Developed by Sleem Alaa.*
