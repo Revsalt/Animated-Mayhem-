@@ -2,7 +2,7 @@
 
 Welcome to the repository for this unique platform fighting game. Built on a combat premise similar to *Brawlhalla*, this project introduces a fundamental twist: **players animate their own character's attacks and movements**.
 
-![Game Overview Screenshot](<img width="1592" height="890" alt="Screenshot 2026-06-16 073603" src="https://github.com/user-attachments/assets/b328d611-67e1-426a-937b-89bb04d77c47" />)
+<img width="1592" height="890" alt="Screenshot 2026-06-16 073603" src="https://github.com/user-attachments/assets/b328d611-67e1-426a-937b-89bb04d77c47"/>
 *A brief caption describing the gameplay or main menu.*
 
 ## Overview
@@ -14,7 +14,7 @@ This project is a multiplayer fighting game that gives players complete creative
 * **Dynamic Combat System:** Movement features like multi-jumping, dashing, and directional attacks map directly to player-authored animations.
 * **JSON Serialization Pipeline:** Custom keyframes are translated to JSON strings, allowing complex animation data to be easily saved locally and shared across the network.
 
-![Animation Editor Screenshot](<img width="1596" height="896" alt="Screenshot 2026-06-16 073512" src="https://github.com/user-attachments/assets/12f0f365-676f-4641-b478-42df01e2abfd" />)
+<img width="1596" height="896" alt="Screenshot 2026-06-16 073512" src="https://github.com/user-attachments/assets/12f0f365-676f-4641-b478-42df01e2abfd"/>
 *A look at the custom in-game animation editor and timeline.*
 
 ## Architecture: The Animation Pipeline
@@ -38,7 +38,7 @@ Once the networked clients receive the JSON payload, the reverse process occurs 
 * The `PlayerAnimation` script listens for custom inputs (e.g., Q, E, F) and temporarily disables the standard Unity Animator.
 * It then uses a coroutine to manually step through the deserialized `KeyFrame` arrays, applying the exact transform data authored by the opposing player frame-by-frame and calculating the exact wait times between each keyframe.
 
-![Multiplayer Combat Screenshot](<img width="1919" height="1079" alt="Screenshot 2026-06-16 073846" src="https://github.com/user-attachments/assets/5d7a804c-d798-4622-bd68-d455ac61af58" />)
+<img width="1919" height="1079" alt="Screenshot 2026-06-16 073846" src="https://github.com/user-attachments/assets/5d7a804c-d798-4622-bd68-d455ac61af58" />
 *Players battling using their synchronized, custom-authored animations.*
 
 ## Multiplayer Integration
