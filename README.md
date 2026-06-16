@@ -3,7 +3,6 @@
 Welcome to the repository for this unique platform fighting game. Built on a combat premise similar to *Brawlhalla*, this project introduces a fundamental twist: **players animate their own character's attacks and movements**.
 
 <img width="1592" height="890" alt="Screenshot 2026-06-16 073603" src="https://github.com/user-attachments/assets/b328d611-67e1-426a-937b-89bb04d77c47"/>
-*A brief caption describing the gameplay or main menu.*
 
 ## Overview
 This project is a multiplayer fighting game that gives players complete creative control over their character's combat animations. Players utilize a custom in-game editor to pose character models, define keyframes, and save these sequences. In multiplayer matches, these custom animations are serialized, transmitted to other clients, and reconstructed in real-time so opponents see exactly what was authored.
