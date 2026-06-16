@@ -2,40 +2,64 @@
 
 Welcome to the repository for this unique platform fighting game. Built on a combat premise similar to *Brawlhalla*, this project introduces a fundamental twist: **players animate their own character's attacks and movements**.
 
+![Game Overview Screenshot](<img width="1592" height="890" alt="Screenshot 2026-06-16 073603" src="https://github.com/user-attachments/assets/b328d611-67e1-426a-937b-89bb04d77c47" />)
+*A brief caption describing the gameplay or main menu.*
+
 ## Overview
 This project is a multiplayer fighting game that gives players complete creative control over their character's combat animations. Players utilize a custom in-game editor to pose character models, define keyframes, and save these sequences. In multiplayer matches, these custom animations are serialized, transmitted to other clients, and reconstructed in real-time so opponents see exactly what was authored.
 
 ## Features
-*   **In-Game Animation Editor:** A robust timeline and transform tools allow players to modify positional and rotational data to author custom keyframed animations.
-*   **Authoritative Multiplayer:** Built with the Mirror networking framework, ensuring synchronized combat, health state management, and reliable delivery of custom animation data.
-*   **Dynamic Combat System:** Movement features like multi-jumping, dashing, and directional attacks map directly to player-authored animations.
-*   **JSON Serialization Pipeline:** Custom keyframes are translated to JSON strings, allowing complex animation data to be easily saved locally and shared across the network.
+* **In-Game Animation Editor:** A robust timeline and transform tools allow players to modify positional and rotational data to author custom keyframed animations.
+* **Authoritative Multiplayer:** Built with the Mirror networking framework, ensuring synchronized combat, health state management, and reliable delivery of custom animation data.
+* **Dynamic Combat System:** Movement features like multi-jumping, dashing, and directional attacks map directly to player-authored animations.
+* **JSON Serialization Pipeline:** Custom keyframes are translated to JSON strings, allowing complex animation data to be easily saved locally and shared across the network.
+
+![Animation Editor Screenshot](<img width="1596" height="896" alt="Screenshot 2026-06-16 073512" src="https://github.com/user-attachments/assets/12f0f365-676f-4641-b478-42df01e2abfd" />)
+*A look at the custom in-game animation editor and timeline.*
 
 ## Architecture: The Animation Pipeline
 Building an animation engine from scratch within Unity presented significant engineering challenges, particularly regarding data serialization and playback synchronization.
 
 ### 1. The Animation Editor (Development Struggles)
 Creating a runtime animation editor required building custom timeline logic and manipulation tools from the ground up:
-*   Players interact with individual character joints using custom `Tool` scripts. These scripts track mouse coordinates on the screen and translate them into local position and rotation shifts for `AnimatableObjects`.
-*   The `TimeLine` script manages an array of `KeyFrameSlot` objects. A major struggle during development was managing coroutine execution for accurate playback.The TimeLine required a delicate loop that measures the `durationBetweenFrames` before triggering the character model to visually update.
+* Players interact with individual character joints using custom `Tool` scripts. These scripts track mouse coordinates on the screen and translate them into local position and rotation shifts for `AnimatableObjects`.
+* The `TimeLine` script manages an array of `KeyFrameSlot` objects. A major struggle during development was managing coroutine execution for accurate playback. The TimeLine required a delicate loop that measures the `durationBetweenFrames` before triggering the character model to visually update.
 
 ### 2. JSON Serialization & Networking
 Because standard Unity `AnimationClip` objects cannot be easily created and networked at runtime, the project uses a custom data structure to share animations.
-*   A custom `KeyFrame` class stores `Vector2` arrays for model positions and `float` arrays for rotations.
-*   When an animation is saved, `CharacterCharacteristic` serializes the data. Because Unity's native `JsonUtility` struggles with multi-dimensional arrays, the system converts individual animations into strings, wraps them in brackets, and separates multiple animations using a `^` delimiter.
-*   This compacted JSON string is saved locally to a `MyPlayerCharacteristics.txt` file via the `MyPlayerInitializer`.
-*   When joining a Mirror multiplayer session, this text payload is sent to the server to be distributed to other connected clients.
+* A custom `KeyFrame` class stores `Vector2` arrays for model positions and `float` arrays for rotations.
+* When an animation is saved, `CharacterCharacteristic` serializes the data. Because Unity's native `JsonUtility` struggles with multi-dimensional arrays, the system converts individual animations into strings, wraps them in brackets, and separates multiple animations using a `^` delimiter.
+* This compacted JSON string is saved locally to a `MyPlayerCharacteristics.txt` file via the `MyPlayerInitializer`.
+* When joining a Mirror multiplayer session, this text payload is sent to the server to be distributed to other connected clients.
 
 ### 3. Reconstruction & Playback
 Once the networked clients receive the JSON payload, the reverse process occurs so the animation can be played:
-*   The string is split by the `^` delimiter, and `JsonUtility.FromJson` reconstructs the arrays into playable `KeyFrame` data.
-*   The `PlayerAnimation` script listens for custom inputs (e.g., Q, E, F) and temporarily disables the standard Unity Animator.
-*   It then uses a coroutine to manually step through the deserialized `KeyFrame` arrays, applying the exact transform data authored by the opposing player frame-by-frame and calculating the exact wait times between each keyframe.
+* The string is split by the `^` delimiter, and `JsonUtility.FromJson` reconstructs the arrays into playable `KeyFrame` data.
+* The `PlayerAnimation` script listens for custom inputs (e.g., Q, E, F) and temporarily disables the standard Unity Animator.
+* It then uses a coroutine to manually step through the deserialized `KeyFrame` arrays, applying the exact transform data authored by the opposing player frame-by-frame and calculating the exact wait times between each keyframe.
+
+![Multiplayer Combat Screenshot](<img width="1919" height="1079" alt="Screenshot 2026-06-16 073846" src="https://github.com/user-attachments/assets/5d7a804c-d798-4622-bd68-d455ac61af58" />)
+*Players battling using their synchronized, custom-authored animations.*
 
 ## Multiplayer Integration
 The multiplayer architecture relies heavily on Mirror for state synchronization:
-*   **Damage & Health:** Health changes are managed by the server using `[SyncVar]` hooks. When a player takes damage, a `[ClientRpc]` triggers the physics calculation on the specific local player's `Rigidbody` to apply knockback.
-*   **Matchmaking & Menus:** A custom `MainMenu` script interfaces with Mirror's `NetworkManagerHUD` to handle server hosting, client connection statuses, and asynchronous scene loading.
+* **Damage & Health:** Health changes are managed by the server using `[SyncVar]` hooks. When a player takes damage, a `[ClientRpc]` triggers the physics calculation on the specific local player's `Rigidbody` to apply knockback.
+* **Matchmaking & Menus:** A custom `MainMenu` script interfaces with Mirror's `NetworkManagerHUD` to handle server hosting, client connection statuses, and asynchronous scene loading.
 
 ---
+
+## ⚠️ Important Play Instructions
+
+> **Multiplayer Hosting:** Multiplayer is currently supported via direct IP connection. To host a game, you **must port forward port 25565**.
+> 
+> **Required Setup Before Joining:** You cannot join a match unless you have a full set of animations equipped in the **Character Tab**. 
+> 
+> Don't want to animate your own right now? You can download a pre-made list of functional animations from this Google Drive link to get started:  
+> **[Download Starter Animations (Google Drive)](#)** *(Replace # with your link)*
+
+---
+
+### Play the Game
+[![Play on Itch.io](path/to/your/itch_io_banner_image.png)](https://your-itch-link-here.itch.io)
+
 *Developed by Sleem Alaa.*
