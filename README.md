@@ -39,7 +39,6 @@ Once the networked clients receive the JSON payload, the reverse process occurs 
 * It then uses a coroutine to manually step through the deserialized `KeyFrame` arrays, applying the exact transform data authored by the opposing player frame-by-frame and calculating the exact wait times between each keyframe.
 
 <img width="1919" height="1079" alt="Screenshot 2026-06-16 073846" src="https://github.com/user-attachments/assets/5d7a804c-d798-4622-bd68-d455ac61af58" />
-*Players battling using their synchronized*
 
 ## Multiplayer Integration
 The multiplayer architecture relies heavily on Mirror for state synchronization:
