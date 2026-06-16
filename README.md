@@ -1,5 +1,6 @@
 # Custom Animation Platform Fighter 
-
+> **Looking for the game?** You can find the playable version on our [Itch.io page](#play-the-game) at the bottom of this README.
+> 
 Welcome to the repository for this unique platform fighting game. Built on a combat premise similar to *Brawlhalla*, this project introduces a fundamental twist: **players animate their own character's attacks and movements**.
 
 <img width="1592" height="890" alt="Screenshot 2026-06-16 073603" src="https://github.com/user-attachments/assets/b328d611-67e1-426a-937b-89bb04d77c47"/>
