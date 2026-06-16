@@ -53,7 +53,7 @@ The multiplayer architecture relies heavily on Mirror for state synchronization:
 > **Required Setup Before Joining:** You cannot join a match unless you have a full set of animations equipped in the **Character Tab**. 
 > 
 > Don't want to animate your own right now? You can download a pre-made list of functional animations from this Google Drive link to get started:  
-> **[Download Starter Animations (Google Drive)](#)** *[(Replace # with your link)](https://drive.google.com/drive/folders/1n4RZw3MEy38LklwL3LSlIC3FWCuKbTuw?usp=sharing)*
+> **[Download Starter Animations (Google Drive)](https://drive.google.com/drive/folders/1n4RZw3MEy38LklwL3LSlIC3FWCuKbTuw?usp=sharing)**
 
 ---
 
