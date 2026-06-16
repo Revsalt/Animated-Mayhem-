@@ -73,7 +73,7 @@ public class TimeLine : MonoBehaviour
                 frames.Add(child.gameObject.GetComponent<KeyFrameSlot>().myKeyFrame);
         }
 
-        return frames.ToArray(); 
+        return frames.ToArray();
     }
 
     public void Play()
@@ -111,11 +111,14 @@ public class TimeLine : MonoBehaviour
                 keyedFrames.Add(frames[i].GetComponent<KeyFrameSlot>());
                 durationBetweenFrames.Add(0);
 
-                if (i == 0)
-                    EditorController.Instance.characterValues.PlayKeyFrame(frames[i].GetComponent<KeyFrameSlot>().myKeyFrame, true , 0);
+                if (keyedFrames.Count == 1)
+                    EditorController.Instance.characterValues.PlayKeyFrame(frames[i].GetComponent<KeyFrameSlot>().myKeyFrame, true, 0);
             }
 
-            durationBetweenFrames[durationBetweenFrames.Count-1]++;
+            if (durationBetweenFrames.Count > 0)
+            {
+                durationBetweenFrames[durationBetweenFrames.Count - 1]++;
+            }
         }
 
         if (keyedFrames.Count == 0)
@@ -129,9 +132,8 @@ public class TimeLine : MonoBehaviour
                 {
                     int keyindex = keyedFrames.IndexOf(item);
 
-                    if (keyindex + 1 <= keyedFrames.Count-1)
-                        EditorController.Instance.characterValues.PlayKeyFrame(keyedFrames[keyindex + 1].myKeyFrame, false , durationBetweenFrames[keyindex]);
-
+                    if (keyindex + 1 <= keyedFrames.Count - 1)
+                        EditorController.Instance.characterValues.PlayKeyFrame(keyedFrames[keyindex + 1].myKeyFrame, false, durationBetweenFrames[keyindex]);
                 }
             }
 
@@ -144,7 +146,7 @@ public class TimeLine : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Delete) && SelectedFrameSlot!= null)
+        if (Input.GetKeyDown(KeyCode.Delete) && SelectedFrameSlot != null)
             SelectedFrameSlot.RemoveKeyFrame();
 
         if (!isPlaying && SelectedFrameSlot != null)
